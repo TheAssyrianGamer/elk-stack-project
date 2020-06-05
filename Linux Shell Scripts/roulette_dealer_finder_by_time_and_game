@@ -1,0 +1,48 @@
+#!/bin/bash
+
+echo -n "Enter the schedule date you are looking for (Format: MMDD): "
+read var1
+
+echo -n "Enter the number of the game you are searchng for 1) Blackjack 2) Roulette 3) Texas Hold-Em: "
+read var2
+
+echo -n "Enter the time you'd like to search for in the schedule: (Format: HH:MM:SS AM or HH:MM:SS PM): "
+read var3
+
+case $var2 in
+
+	1)
+	echo "Printing Blackjack schedule to dealer_schedule_file" 
+	awk -F" " '{print($1, $2, $3, $4)}' ${var1}_Dealer_schedule | grep "$var3" > dealer_schedule_file
+	;;
+
+	2)
+	echo "Printing Roulette schedule to dealer_schedule_file" 
+	awk -F" " '{print($1, $2, $5, $6)}' ${var1}_Dealer_schedule | grep "$var3" > dealer_schedule_file
+	;;
+
+	3)
+	echo "Printing Texas HoldEM schedule to dealer_schedule_file" 
+	awk -F" " '{print($1, $2, $7, $8)}' ${var1}_Dealer_schedule | grep "$var3" > dealer_schedule_file	
+	;;
+
+	Blackjack)
+	echo "Printing Blackjack schedule to dealer_schedule_file" 
+	awk -F" " '{print($1, $2, $3, $4)}' ${var1}_Dealer_schedule | grep "$var3" > dealer_schedule_file
+	;;
+
+	Roulette) 
+	echo "Printing Roulette schedule to dealer_schedule_file" 
+	awk -F" " '{print($1, $2, $5, $6)}' ${var1}_Dealer_schedule | grep "$var3" > dealer_schedule_file
+	;;
+
+	Texas)
+	echo "Printing Texas HoldEM schedule to dealer_schedule_file" 
+	awk -F" " '{print($1, $2, $7, $8)}' ${var1}_Dealer_schedule | grep "$var3" > dealer_schedule_file
+	;;
+
+	*)
+	echo "Invalid input, please try again."
+	;;
+
+esac
